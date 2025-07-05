@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Geektwitter3</title>
+    <title>Cafe Vlog</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%#= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <h1>Cafe Vlog</h1>
+      <div class="header-list">
+      <ul>
+        <% if user_signed_in? %>
+          <li><%= link_to "マイページ", user_path(current_user) %></li>
+          <li><%= link_to "友達フォロー", following_user_path(current_user) %></li>
+        <li><%= link_to "新規投稿",new_tweet_path %></li>
+        <li><%= link_to "検索",tweets_search_path %></li>
+        <% end %>
+      </ul>
+      </div>
+    </header>
+    <main>
+      <%= yield %>
+    </main>
   </body>
 </html>

@@ -1,51 +1,55 @@
 class TweetsController < ApplicationController
 before_action :authenticate_user!
-end
 def index
-@tweets = Tweet.all
+  @tweets = Tweet.all.page(params[:page])
 end
 def new
     @tweet = Tweet.new
 end
 def create
-    tweet = Tweet.new(tweet_params)
-    tweet.user_id = current_user.id
-    if tweet.save
-      redirect_to :action => "index"
-    else
-      redirect_to :action => "new"
-    end
+  @tweet = Tweet.new(tweet_params)
+  @tweet.user_id = current_user.id
+  if @tweet.save
+    redirect_to user_path(current_user), notice: "投稿が完了しました"
+  else
+    render :new
+  end
 end
 def show
     @tweet = Tweet.find(params[:id])
+    @comments = @tweet.comments
+    @comment = Comment.new
 end
 def edit
     @tweet = Tweet.find(params[:id])
 end
 def update
-    tweet = Tweet.find(params[:id])
-    if tweet.update(tweet_params)
-      redirect_to :action => "show", :id => tweet.id
-    else
-      redirect_to :action => "new"
-    end
+  @tweet = Tweet.find(params[:id])
+  if @tweet.update(tweet_params)
+    redirect_to user_path(current_user), notice: "編集が完了しました"
+  else
+    render :edit
   end
-def destroy
-    tweet = Tweet.find(params[:id])
-    tweet.destroy
-    redirect_to action: :index
 end
+def destroy
+  @tweet = Tweet.find(params[:id])
+  if @tweet.user == current_user
+    @tweet.destroy
+    redirect_to user_path(current_user), notice: "投稿を削除しました"
+  else
+    redirect_to tweets_path, alert: "削除できません"
+  end
+end
+
 def search
-      if params[:search] == nil
-        @tweets= Tweet.all
-      elsif params[:search] == ''
-        @tweets= Tweet.all
-      else
-        @tweets = Tweet.where("name LIKE ? ",'%' + params[:search] + '%')
+  @tweets = Tweet.all
+  search = params[:search]
+    @tweets = @tweets.joins(:user).where("name LIKE ?", "%#{search}%") if search.present?  
+  tweets = Tweet.includes(:liked_users).sort {|a,b| b.liked_users.size <=> a.liked_users.size}
 end
   private
 def tweet_params
-    params.require(:tweet).permit(:body)
+    params.require(:tweet).permit(:body,:overall,:taste,:atmosphere,:service,:photo, :image,:lat,:lng)
 end
 end
 

@@ -1,5 +1,12 @@
-<h3>投稿を検索</h3>
+<h3>カフェの名前を検索</h3>
  <%= form_tag({controller:"tweets",action:"search"}, method: :get) do %>
    <%= text_field_tag :search %>
    <%= submit_tag '検索する'  %>
 <% end %>
+<% @tweets.each_with_index do |tweet, index| %>
+  <% break if index >= 5 %>
+  <% if index == 0 %> <span style="color: gold; font-weight: bold;">🏆 1位</span> <% elsif index == 1 %> <span style="color: silver; font-weight: bold;">🥈 2位</span> <% elsif index == 2 %> <span style="color: #CD7F32; font-weight: bold;">🥉 3位</span> <% else %> <span style="font-weight: bold;"><%= index + 1 %>位</span> <% end %>
+    <%= tweet.name %>
+  <p><%= tweet.body %></p>
+<% end %>
+<h2>新着投稿</h2> <% @tweets.order(created_at: :desc).limit(5).each do |tweet| %> <p><%= tweet.body %></p> <% end %>

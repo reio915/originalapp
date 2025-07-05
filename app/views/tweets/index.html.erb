@@ -1,16 +1,61 @@
-<h1>GeekTwitter</h1>
-<%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
-<h3>Tweet一覧</h3>
+<h1>Cafe Vlog</h1>
+<h3>Post一覧</h3>
 <%= link_to "新規投稿へ", new_tweet_path %>
-<div class="tweets-container">
-<% @tweets.each do |t| %>
+<%= page_entries_info @tweets %>
+<%= paginate @tweets %>
+    <div class="tweets-container">
+     <% @tweets.each do |t| %>
     <div class="tweet">
-    <%= t.user.email %>
+     <% if t.image.attached? %>
+        <%= image_tag t.image, size: '250x200'%>
+     <% end %>
       <%= t.body %>
       <%= t.created_at %>
+      <%= t.name %>
+    <div>
+<div>
+<h2>総合評価：
+<span class="star-rating">
+   <span class="star-rating-front" style="width: <%= getPercent(t.overall) %>%;">★★★★★</span>
+   <span class="star-rating-back">★★★★★</span>
+</span> 
+</h2>
+</div>
+<div>
+<h2>味：
+<span class="star-rating">
+   <span class="star-rating-front" style="width: <%= getPercent(t.taste) %>%;">★★★★★</span>
+   <span class="star-rating-back">★★★★★</span>
+</span> 
+</h2>
+</div>
+<div>
+<h2>雰囲気：
+<span class="star-rating">
+   <span class="star-rating-front" style="width: <%= getPercent(t.atmosphere) %>%;">★★★★★</span>
+   <span class="star-rating-back">★★★★★</span>
+</span> 
+</h2>
+</div>
+<div>
+<h2>接客：
+<span class="star-rating">
+   <span class="star-rating-front" style="width: <%= getPercent(t.service) %>%;">★★★★★</span>
+   <span class="star-rating-back">★★★★★</span>
+</span> 
+</h2>
+</div>
+<div>
+<h2>撮影のしやすさ：
+<span class="star-rating">
+   <span class="star-rating-front" style="width: <%= getPercent(t.photo) %>%;">★★★★★</span>
+   <span class="star-rating-back">★★★★★</span>
+</span> 
+</h2>
+    </div>
     <%= link_to "詳細へ", tweet_path(t.id) %>
-    <%= link_to "編集する", edit_tweet_path(t.id) %>
-    <%= button_to "削除する", tweet_path(t.id), method: :delete %> 
+    <% if user_signed_in? && current_user.id == t.user_id %>
+    <% end %> 
     </div>
   <% end %>
 </div>

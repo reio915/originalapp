@@ -1,0 +1,44 @@
+<h1>マイページ</h1>
+<% if @user.image.attached? %>
+     <%= image_tag  @user.image, size: '250x200'%>
+<% end %>
+<p>名前 : <%= @user.name %></p>
+<p>メールアドレス : <%= @user.email %></p>
+<p>プロフィール : <%= @user.profile %></p>
+<p> <%= link_to "#{@user.following.count} フォロー", following_user_path(@user) %> 
+<%= link_to "#{@user.followers.count} フォロワー", followers_user_path(@user) %> </p>
+<% if current_user.id == @user.id %>
+  <%= link_to "編集する", edit_user_registration_path %>
+<% end %>
+<% if current_user != @user %> 
+<div id="follow_form"> 
+<% if current_user.following?(@user) %> 
+<%= form_with model: current_user.active_relationships.find_by(followed_id: @user.id), method: :delete, local: true do |f| %> 
+<%= f.submit "フォロー解除", class: "btn btn-danger" %> 
+<% end %> 
+<% else %> 
+<%= form_with model: current_user.active_relationships.build, local: true do |f| %> 
+<%= hidden_field_tag :followed_id, @user.id %> <%= f.submit "フォロー", class: "btn btn-primary" %> 
+<% end %> 
+<% end %> 
+</div> 
+<% end %>
+<h2>ユーザーの投稿一覧</h2>
+<% @user.tweets.each do |t| %>
+<div class="tweet">
+  <%= t.user.name %>
+  <%= t.body %>
+  <% if t.user == current_user %>
+      <%= link_to "編集する", edit_tweet_path(t), class: "btn btn-primary" %>
+      <%= form_with model: t, method: :delete, data: { confirm: "本当に削除しますか？" } do |f| %>
+        <%= f.submit "削除する", class: "btn btn-danger" %>
+    <% end %>
+<% end %>
+ </div>
+<% end %>
+<h2>ユーザーがいいねした投稿一覧</h2>
+<% @user.liked_tweets.each do |t| %>
+  <%= t.user.name %>
+  <%= t.body %>
+<% end %>
+<%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
