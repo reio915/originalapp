@@ -3,59 +3,22 @@
 <%= link_to "新規投稿へ", new_tweet_path %>
 <%= page_entries_info @tweets %>
 <%= paginate @tweets %>
-    <div class="tweets-container">
-     <% @tweets.each do |t| %>
+
+<div class="tweets-container">
+  <% @tweets.each do |t| %>
     <div class="tweet">
-     <% if t.image.attached? %>
-        <%= image_tag t.image, size: '250x200'%>
-     <% end %>
-      <%= t.body %>
-      <%= t.created_at %>
-      <%= t.name %>
-    <div>
-<div>
-<h2>総合評価：
-<span class="star-rating">
-   <span class="star-rating-front" style="width: <%= getPercent(t.overall) %>%;">★★★★★</span>
-   <span class="star-rating-back">★★★★★</span>
-</span> 
-</h2>
-</div>
-<div>
-<h2>味：
-<span class="star-rating">
-   <span class="star-rating-front" style="width: <%= getPercent(t.taste) %>%;">★★★★★</span>
-   <span class="star-rating-back">★★★★★</span>
-</span> 
-</h2>
-</div>
-<div>
-<h2>雰囲気：
-<span class="star-rating">
-   <span class="star-rating-front" style="width: <%= getPercent(t.atmosphere) %>%;">★★★★★</span>
-   <span class="star-rating-back">★★★★★</span>
-</span> 
-</h2>
-</div>
-<div>
-<h2>接客：
-<span class="star-rating">
-   <span class="star-rating-front" style="width: <%= getPercent(t.service) %>%;">★★★★★</span>
-   <span class="star-rating-back">★★★★★</span>
-</span> 
-</h2>
-</div>
-<div>
-<h2>撮影のしやすさ：
-<span class="star-rating">
-   <span class="star-rating-front" style="width: <%= getPercent(t.photo) %>%;">★★★★★</span>
-   <span class="star-rating-back">★★★★★</span>
-</span> 
-</h2>
-    </div>
-    <%= link_to "詳細へ", tweet_path(t.id) %>
-    <% if user_signed_in? && current_user.id == t.user_id %>
-    <% end %> 
+      <% if t.image.attached? %>
+        <%= image_tag t.image, size: '250x200' %>
+      <% end %>
+      <p><%= t.body %></p>
+      <p><%= t.created_at.strftime("%Y/%m/%d") %></p>
+      <p><%= t.name %></p>
+
+      
+
+      <br>
+      <%= link_to "詳細へ", tweet_path(t.id), class: "btn" %>
     </div>
   <% end %>
 </div>
+<%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>

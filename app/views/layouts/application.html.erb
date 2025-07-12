@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Cafe Vlog</title>
+    <title>Cafélogue</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -12,14 +12,14 @@
 
   <body>
     <header>
-      <h1>Cafe Vlog</h1>
+      <h1>Cafélogue</h1>
       <div class="header-list">
       <ul>
         <% if user_signed_in? %>
-          <li><%= link_to "マイページ", user_path(current_user) %></li>
-          <li><%= link_to "友達フォロー", following_user_path(current_user) %></li>
-        <li><%= link_to "新規投稿",new_tweet_path %></li>
-        <li><%= link_to "検索",tweets_search_path %></li>
+          <li><%= link_to "My Page", user_path(current_user) %></li>
+          <li><%= link_to "Follow", following_user_path(current_user) %></li>
+          <li><%= link_to "New Post",new_tweet_path %></li>
+          <li><%= link_to "Search",tweets_search_path %></li>
         <% end %>
       </ul>
       </div>

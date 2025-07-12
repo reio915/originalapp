@@ -13,38 +13,48 @@
  *= require_tree .
  *= require_self
  */
-* {
-  padding: 0;
-  margin: 0;
-}
-body {
-  font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "メイリオ",
-    Meiryo, "ＭＳ Ｐゴシック", sans-serif;
-}
-header {
-  background-color: #0a4b32;;
-  height: 80px;
-  font-weight: bold;
+
+.custom-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #dcdcdc; /* 薄いグレー */
+  padding: 10px 20px;
+  font-family: 'Dancing Script', cursive;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
-header a {
-  color: white; 
-  text-decoration: none; 
+
+/* ロゴ部分 */
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 0;
 }
-header h1 {
-  color: white;
-  margin-left: 20px;
-}
-.header-list {
+
+/* ナビゲーションリスト */
+.nav-links {
   display: flex;
-  align-items: center;
-}
-header ul {
-  display: flex;
-}
-header li {
+  gap: 20px; 
   list-style: none;
-  margin-right: 40px;
+  margin: 0;
+  padding: 0;
 }
+
+/* 各リンク項目 */
+.nav-links li {
+  margin: 0;
+  padding: 0;
+}
+
+/* リンクの見た目 */
+.nav-links li a {
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+  font-family: 'Dancing Script', cursive;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #666;
+} 

@@ -1,4 +1,4 @@
-<h1>マイページ</h1>
+<!--<h1>マイページ</h1>
 <% if @user.image.attached? %>
      <%= image_tag  @user.image, size: '250x200'%>
 <% end %>
@@ -41,4 +41,43 @@
   <%= t.user.name %>
   <%= t.body %>
 <% end %>
-<%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
+<%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>-->
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cafelogue</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="profile-section">
+    <div class="profile-picture"></div>
+    <div class="account-name">Account Name</div>
+    <div class="profile-info">プロフィール</div>
+    <div class="follow-stats">フォロー　フォロワー</div>
+    <div class="button edit-button">
+   <% if current_user.id == @user.id %>
+  <%= link_to "編集する", edit_user_registration_path, class: "edit-button-link" %>
+<% end %>
+  </div>
+  <hr>
+  <div class="section">
+    <h2>My posts</h2>
+    <div class="posts">
+      <div class="post-box"></div>
+      <div class="post-box"></div>
+      <div class="post-box"></div>
+    </div>
+  </div>
+  <div class="section">
+    <h2>Liked posts</h2>
+    <div class="posts">
+      <div class="post-box"></div>
+      <div class="post-box"></div>
+      <div class="post-box"></div>
+    </div>
+  </div>
+</body>
+</html>

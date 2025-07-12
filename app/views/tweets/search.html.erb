@@ -1,12 +1,58 @@
-<h3>カフェの名前を検索</h3>
- <%= form_tag({controller:"tweets",action:"search"}, method: :get) do %>
-   <%= text_field_tag :search %>
-   <%= submit_tag '検索する'  %>
-<% end %>
-<% @tweets.each_with_index do |tweet, index| %>
-  <% break if index >= 5 %>
-  <% if index == 0 %> <span style="color: gold; font-weight: bold;">🏆 1位</span> <% elsif index == 1 %> <span style="color: silver; font-weight: bold;">🥈 2位</span> <% elsif index == 2 %> <span style="color: #CD7F32; font-weight: bold;">🥉 3位</span> <% else %> <span style="font-weight: bold;"><%= index + 1 %>位</span> <% end %>
-    <%= tweet.name %>
-  <p><%= tweet.body %></p>
-<% end %>
-<h2>新着投稿</h2> <% @tweets.order(created_at: :desc).limit(5).each do |tweet| %> <p><%= tweet.body %></p> <% end %>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+<div class="search-page">
+
+  <!-- 検索フォーム -->
+  <section class="search-section">
+    <h3>カフェの名前を検索</h3>
+    <%= form_tag({ controller: "tweets", action: "search" }, method: :get) do %>
+      <%= text_field_tag :search, params[:search], placeholder: "例）表参道 カフェ" %>
+      <%= submit_tag '検索する' %>
+    <% end %>
+  </section>
+
+  <!-- ランキング + 新着投稿 横並び -->
+  <div class="content-columns">
+    <!-- ランキング -->
+    <section class="ranking-section">
+      <h2>Café ranking</h2>
+      <ul class="ranking-list">
+        <% @tweets.first(5).each_with_index do |tweet, index| %>
+        <li>
+  <div class="post-text">
+    <% if index == 0 %>
+      <span class="rank gold">1位</span>
+    <% elsif index == 1 %>
+      <span class="rank silver">2位</span>
+    <% elsif index == 2 %>
+      <span class="rank bronze">3位</span>
+    <% else %>
+      <span class="rank"><%= index + 1 %>位</span>
+    <% end %>
+    <strong><%= tweet.name %></strong>
+    <p><%= tweet.body %></p>
+  </div>
+  <% if tweet.image.attached? %>
+    <%= image_tag tweet.image, class: "post-image" %>
+  <% end %>
+</li>  
+        <% end %>
+      </ul>
+    </section>
+
+    <!-- 新着投稿 -->
+    <section class="new-posts-section">
+      <h2>New posts</h2>
+      <ul class="new-posts-list">
+        <% @tweets.order(created_at: :desc).limit(5).each do |tweet| %>
+          <li>
+            <strong><%= tweet.name %></strong>
+            <p><%= tweet.body %></p>
+            <% if tweet.image.attached? %>
+              <%= image_tag tweet.image, class: "post-image" %>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </section>
+  </div>
+</div>

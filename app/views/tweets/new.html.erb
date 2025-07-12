@@ -1,140 +1,117 @@
-<h1>Cafe Vlog</h1>
-<h3>New Post</h3>
-<%= form_for @tweet do |f| %>
-  <div class="field">
+<div class="form-wrapper">
+  <h2>New Post</h2>
+  <%= form_for @tweet do |f| %>
+    <div class="form-columns">
+      <!-- 左カラム -->
+      <div class="form-left">
+        <div class="form-group">
+         <%= f.label :Name %>
+    <%= f.text_field :body, :size => 50 %>
+        </div>
+        <div class="form-group">
     <%= f.label :photo %>
     <%= f.file_field :image %>
-  </div>
-  <h5>総合評価</h5>
+    </div>
+<h5>総合評価</h5>
    <div class="post_form">
     <%= f.radio_button :overall, 5 ,id: 'star1'%>
     <label for="star1"><span class="text">最高</span>★</label>
-
     <%= f.radio_button :overall, 4 ,id: 'star2'%>
     <label for="star2"><span class="text">良い</span>★</label>
-
     <%= f.radio_button :overall, 3 ,id: 'star3'%>
     <label for="star3"><span class="text">普通</span>★</label>
-
     <%= f.radio_button :overall, 2 ,id: 'star4'%>
     <label for="star4"><span class="text">微妙</span>★</label>
-
     <%= f.radio_button :overall, 1 ,id: 'star5'%>
     <label for="star5"><span class="text">残念</span>★</label>
  　</div>
  <h5>味</h5>
    <div class="post_form">
     <%= f.radio_button :taste, 5 ,id: 'star6'%>
-    <label for="star6"><span class="text">すごく美味しい</span>★</label>
-
+    <label for="star6"><span class="text">最高</span>★</label>
     <%= f.radio_button :taste, 4 ,id: 'star7'%>
-    <label for="star7"><span class="text">美味しい</span>★</label>
-
+    <label for="star7"><span class="text">良い</span>★</label>
     <%= f.radio_button :taste, 3 ,id: 'star8'%>
     <label for="star8"><span class="text">普通</span>★</label>
-
     <%= f.radio_button :taste, 2 ,id: 'star9'%>
     <label for="star9"><span class="text">微妙</span>★</label>
-
     <%= f.radio_button :taste, 1 ,id: 'star10'%>
-    <label for="star10"><span class="text">合わない</span>★</label>
+    <label for="star10"><span class="text">残念</span>★</label>
  </div>
  <h5>雰囲気</h5>
    <div class="post_form">
     <%= f.radio_button :atmosphere, 5 ,id: 'star11'%>
     <label for="star11"><span class="text">最高</span>★</label>
-
     <%= f.radio_button :atmosphere, 4 ,id: 'star12'%>
     <label for="star12"><span class="text">良い</span>★</label>
-
     <%= f.radio_button :atmosphere, 3 ,id: 'star13'%>
     <label for="star13"><span class="text">普通</span>★</label>
-
     <%= f.radio_button :atmosphere, 2 ,id: 'star14'%>
     <label for="star14"><span class="text">微妙</span>★</label>
-
     <%= f.radio_button :atmosphere, 1 ,id: 'star15'%>
     <label for="star15"><span class="text">残念</span>★</label>
  </div>
  <h5>接客</h5>
    <div class="post_form">
     <%= f.radio_button :service, 5 ,id: 'star16'%>
-    <label for="star16"><span class="text">すごく丁寧</span>★</label>
-
+    <label for="star16"><span class="text">最高</span>★</label>
     <%= f.radio_button :service, 4 ,id: 'star17'%>
-    <label for="star17"><span class="text">丁寧</span>★</label>
-
+    <label for="star17"><span class="text">良い</span>★</label>
     <%= f.radio_button :service, 3 ,id: 'star18'%>
     <label for="star18"><span class="text">普通</span>★</label>
-
     <%= f.radio_button :service, 2 ,id: 'star19'%>
     <label for="star19"><span class="text">微妙</span>★</label>
-
     <%= f.radio_button :service, 1 ,id: 'star20'%>
     <label for="star20"><span class="text">残念</span>★</label>
  </div>
  <h5>撮影のしやすさ</h5>
    <div class="post_form">
     <%= f.radio_button :photo, 5 ,id: 'star21'%>
-    <label for="star21"><span class="text">すごく撮りやすい</span>★</label>
-
+    <label for="star21"><span class="text">最高</span>★</label>
     <%= f.radio_button :photo, 4 ,id: 'star22'%>
-    <label for="star22"><span class="text">撮りやすい</span>★</label>
-
+    <label for="star22"><span class="text">良い</span>★</label>
     <%= f.radio_button :photo, 3 ,id: 'star23'%>
     <label for="star23"><span class="text">普通</span>★</label>
-
     <%= f.radio_button :photo, 2 ,id: 'star24'%>
-    <label for="star24"><span class="text">少し撮りづらい</span>★</label>
-
+    <label for="star24"><span class="text">微妙</span>★</label>
     <%= f.radio_button :photo, 1 ,id: 'star25'%>
-    <label for="star25"><span class="text">撮りづらい</span>★</label>
+    <label for="star25"><span class="text">残念</span>★</label>
  </div>
-  <div class="field">
-    <%= f.label :comments %>
+ <div class="form-group">
+          <%= f.label :comments %>
     <%= f.text_area :body, :size=>"50x10" %>
-  </div>
-  
-  <div class="actions">
-    <%= f.label :body,"内容" %>
-    <%= f.text_field :body %>
-    <%= f.label :lat,"緯度" %>
+        </div>
+ </div>
+  <div class="form-right">
+  <div class="form-group">
+<%= f.label :lat,"緯度" %>
     <%= f.text_field :lat,:value =>"緯度", id: :lat %>
     <%= f.label :lng,"経度" %>
     <%= f.text_field :lng,:value =>"経度", id: :lng %>
   </div>
-
+ <div class="form-group">
 <h2>Map</h2>
-
 <input id="address" type="textbox" value="GeekSalon">
 <input type="button" value="検索" onclick="codeAddress()">
-<p>マーカーをドラック＆ドロップで位置の調整ができます。<p>
+<p>マーカーをドラック＆ドロップで位置の調整ができます。</p>
 <div id='map'></div>
-
-
-  <%= f.submit "Postする" %>
-<% end %>
 <style>
 #map {
   height: 600px;
   width: 600px;
 }
 </style>
-
 <script>
 //初期マップの設定
 let map
 let marker
 function initMap(){
   geocoder = new google.maps.Geocoder()
-
   map = new google.maps.Map(document.getElementById('map'), {
     center:  {lat: 35.6803997, lng:139.7690174},  //東京
     zoom: 15,
-    
   });
 }
-
 //検索後のマップ作成
 let geocoder
 let aft
@@ -146,22 +123,18 @@ function codeAddress(){
         if (aft == true){
             marker.setMap(null);
         }
-
         //新しくマーカーを作成する
         map.setCenter(results[0].geometry.location);
             marker = new google.maps.Marker({
             map: map,
             position: results[0].geometry.location,
-            draggable: true	// ドラッグ可能にする
+            draggable: true // ドラッグ可能にする
         });
-
         //二度目以降か判断
         aft = true
-
         //検索した時に緯度経度を入力する
         document.getElementById('lat').value = results[0].geometry.location.lat();
         document.getElementById('lng').value = results[0].geometry.location.lng();
-
         // マーカーのドロップ（ドラッグ終了）時のイベント
         google.maps.event.addListener( marker, 'dragend', function(ev){
             // イベントの引数evの、プロパティ.latLngが緯度経度
@@ -171,8 +144,15 @@ function codeAddress(){
     } else {
       alert('該当する結果がありませんでした：' + status);
     }
-  });   
+  });
 }
-
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATK58M2ouWL95xx_56MqkoLRF8M3tAdXk&callback=initMap" async defer></script>
+ </div>
+  </div>
+    </div>
+<div class="submit-wrapper">
+      <%= f.submit "Postする", class: "submit-button" %>
+    </div>
+  <% end %>
+</div>

@@ -26,30 +26,35 @@
 
 <%= render "users/shared/links" %>-->
 
-<%= stylesheet_link_tag 'users_sessions_new', :media => "all" %>
+<%= stylesheet_link_tag 'users_sessions_new', media: "all" %>
+<%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap", media: "all" %>
+
+
 <div class="blank1">
   <div class="blank2">
-    <h2>ログイン</h2>
-    <p>※登録したメールアドレスとパスワードを入力してください。</p>
+    <h2>Log in</h2>
+
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    <div class="field">
-      <%= f.label :メール %><br />
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-    </div>
-    <div class="field">
-      <%= f.label :パスワード %><br />
-      <%= f.password_field :password, autocomplete: "current-password" %>
-    </div>
-    <% if devise_mapping.rememberable? %>
       <div class="field">
-        <%= f.check_box :remember_me %>
-        <%= f.label :パスワードを保存 %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email" %>
+      </div>
+
+      <div class="field">
+        <%= f.password_field :password, autocomplete: "current-password", placeholder: "Password" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me, "パスワードを保存" %>
+        </div>
+      <% end %>
+
+      <div class="actions">
+        <%= f.submit "Log in" %>
       </div>
     <% end %>
-    <div class="actions">
-    <%= f.submit "ログイン" %>
-    </div>
-    <% end %>
+
     <%= render "users/shared/links" %>
   </div>
 </div>

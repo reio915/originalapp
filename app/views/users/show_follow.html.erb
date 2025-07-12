@@ -1,5 +1,8 @@
 <h1><%= @title %></h1>
-
+<%= form_with url: request.path, method: :get, local: true, class: "search-form" do %>
+  <%= text_field_tag :search, params[:search], placeholder: "ユーザー名で検索", class: "search-input" %>
+  <%= submit_tag "検索", class: "search-button" %>
+<% end %>
 <% if @users.any? %>
   <ul class="users">
     <% @users.each do |user| %>

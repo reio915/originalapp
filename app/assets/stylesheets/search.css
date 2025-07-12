@@ -1,0 +1,100 @@
+/* 全体レイアウト */
+.search-page {
+  padding: 20px;
+  font-family: 'Dancing Script', cursive;
+}
+
+/* 検索フォーム */
+.search-section {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.search-section input[type="text"] {
+  padding: 8px;
+  width: 250px;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.search-section input[type="submit"] {
+  padding: 8px 16px;
+  font-size: 16px;
+  background-color: #ccc;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* ランキング + 新着投稿 横並び */
+.content-columns {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* 各カラム */
+.ranking-section,
+.new-posts-section {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* 各リスト */
+.ranking-list,
+.new-posts-list {
+  list-style: none;
+  padding: 0;
+}
+
+.ranking-list li,
+.new-posts-list li {
+ display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+  margin-bottom: 15px;
+  padding: 10px;
+  border-radius: 8px;
+  gap: 10px;
+}
+/* テキスト側 */
+.post-text {
+  flex: 1;
+}
+
+/* ランク色 */
+.rank {
+   font-weight: bold;
+  margin-right: 8px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 15px;
+}
+
+/* 落ち着いたカラー */
+.gold {
+  background-color: #fff8dc; /* コーンシルク */
+  color: #bfa443;
+}
+
+.silver {
+  background-color: #f0f0f0;
+  color: #888;
+}
+
+.bronze {
+  background-color: #f5e0cc;
+  color: #a0522d;
+}
+
+/* 画像 */
+.post-image {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-left: 10px;
+}
