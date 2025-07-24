@@ -44,12 +44,12 @@ end
 def search
   @tweets = Tweet.all
   search = params[:search]
-    @tweets = @tweets.joins(:user).where("name LIKE ?", "%#{search}%") if search.present?  
+  @tweets = @tweets.joins(:user).where("tweets.name LIKE ?", "%#{search}%") if search.present?
   tweets = Tweet.includes(:liked_users).sort {|a,b| b.liked_users.size <=> a.liked_users.size}
 end
   private
 def tweet_params
-    params.require(:tweet).permit(:body,:overall,:taste,:atmosphere,:service,:photo, :image,:lat,:lng)
+    params.require(:tweet).permit(:body,:overall,:taste,:atmosphere,:service,:photo, :image,:lat,:lng,:name)
 end
 end
 

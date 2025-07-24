@@ -1,31 +1,39 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Cafélogue</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+  <title>Cafelogue</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%#= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
 
   <body>
-    <header>
-      <h1>Cafélogue</h1>
-      <div class="header-list">
-      <ul>
-        <% if user_signed_in? %>
-          <li><%= link_to "My Page", user_path(current_user) %></li>
-          <li><%= link_to "Follow", following_user_path(current_user) %></li>
-          <li><%= link_to "New Post",new_tweet_path %></li>
-          <li><%= link_to "Search",tweets_search_path %></li>
-        <% end %>
-      </ul>
-      </div>
-    </header>
+  <% unless controller.controller_name == 'hello' && controller.action_name == 'index' || 
+            controller.controller_name == 'sessions' && controller.action_name == 'new' ||
+            controller.controller_name == 'registrations' && controller.action_name == 'new' %>
+    <header class="custom-header">
+  <h1 class="logo">Cafélogue</h1>
+  <div class="header-list">
+    <ul class="nav-links">
+      <% if user_signed_in? %>
+        <li><%= link_to "My Page", user_path(current_user) %></li>
+        <li><%= link_to "Follow", following_user_path(current_user) %></li>
+        <li><%= link_to "New Post", new_tweet_path %></li>
+        <li><%= link_to "Search", tweets_search_path %></li>
+      <% end %>
+    </ul>
+  </div>
+</header>
+<% end %>
     <main>
       <%= yield %>
     </main>
   </body>
 </html>
+

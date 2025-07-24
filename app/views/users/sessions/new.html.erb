@@ -1,39 +1,11 @@
-<!--<h2>ログイン</h2>
-<p>※登録したメールアドレスとパスワードを入力してください。</p>
+<%= stylesheet_link_tag 'users_sessions_new', media: 'all' %>
+<%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap", media: 'all' %>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <h2>メール </h2><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+<div class="login-wrapper">
+  <div class="login-form">
 
-  <div class="field">
-    <h2>パスワード </h2><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <h2>私を覚える</h2>
-    </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>-->
-
-<%= stylesheet_link_tag 'users_sessions_new', media: "all" %>
-<%= stylesheet_link_tag "https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap", media: "all" %>
-
-
-<div class="blank1">
-  <div class="blank2">
+    <div class="login-container">
     <h2>Log in</h2>
-
     <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
       <div class="field">
         <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email" %>
@@ -54,7 +26,10 @@
         <%= f.submit "Log in" %>
       </div>
     <% end %>
-
+    <div class="login-links">
     <%= render "users/shared/links" %>
+    </div>
+    </div>
+
   </div>
 </div>

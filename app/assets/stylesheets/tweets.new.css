@@ -21,14 +21,15 @@ padding-left: 20px;
 .submit-button {
   padding: 10px 30px;
   font-size: 1.2rem;
-  background-color: #FFBC61;
+  background-color: #dcdcdc;
   border: none;
   border-radius: 8px;
-  color: white;
+  color: black;
   cursor: pointer;
+  font-family: 'Dancing Script', cursive;
 }
 .submit-button:hover {
-  background-color: #f1a545;
+  background-color: #dcdcdc;
 }
 .form-group {
   margin-bottom: 40px;

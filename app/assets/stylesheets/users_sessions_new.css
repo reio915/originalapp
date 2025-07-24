@@ -27,9 +27,11 @@
 .field {
   width: 100%;
   margin-bottom: 20px;
+  text-align: center;
 }
 
 .field input {
+  margin: 0 auto;
   width: 100%;
   padding: 16px;
   border: none;
@@ -39,9 +41,10 @@
 }
 
 .actions input[type="submit"] {
+  text-align: center;
   width: 100%;
   padding: 16px;
-  background-color: #000;
+  background-color: #000000;
   color: #fff;
   font-size: 24px;
   font-family: 'Dancing Script', cursive;
@@ -52,10 +55,6 @@
 
 .actions input[type="submit"]:hover {
   background-color: #333;
-}
-
-p, label {
-  display: none; /* 補足テキストとラベルを消したい場合 */
 }
 
 .signup-wrapper {
@@ -117,4 +116,20 @@ p, label {
 .signup-form label,
 .signup-form em {
   display: none;
+}
+.login-container{
+  display:flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  align-items: center;
+  height: auto;
+  flex-direction: column;
+}
+
+.login-links {
+  margin-top: 20px;
+  text-align: center;
+  width: 100%;
 }

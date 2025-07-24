@@ -3,10 +3,10 @@
 
   <!-- 検索フォーム -->
   <section class="search-section">
-    <h3>カフェの名前を検索</h3>
+    <h2>Cafe Name</h2>
     <%= form_tag({ controller: "tweets", action: "search" }, method: :get) do %>
       <%= text_field_tag :search, params[:search], placeholder: "例）表参道 カフェ" %>
-      <%= submit_tag '検索する' %>
+      <%= submit_tag 'Search' %>
     <% end %>
   </section>
 
@@ -28,13 +28,24 @@
     <% else %>
       <span class="rank"><%= index + 1 %>位</span>
     <% end %>
-    <strong><%= tweet.name %></strong>
-    <p><%= tweet.body %></p>
+
+    <li>
+  <div class="post-content">
+    <!-- 左：テキスト -->
+    <div class="post-text">
+      <strong><%= tweet.name %></strong>
+      <p><%= tweet.body %></p>
+    </div>
+
+    <!-- 右：画像＋ボタン -->
+    <div class="post-image-container">
+      <% if tweet.image.attached? %>
+        <%= image_tag tweet.image, class: "post-image" %>
+      <% end %>
+      <%= link_to 'Detail', tweet_path(tweet), class: 'detail-button' %>
+    </div>
   </div>
-  <% if tweet.image.attached? %>
-    <%= image_tag tweet.image, class: "post-image" %>
-  <% end %>
-</li>  
+</li>
         <% end %>
       </ul>
     </section>
@@ -45,12 +56,22 @@
       <ul class="new-posts-list">
         <% @tweets.order(created_at: :desc).limit(5).each do |tweet| %>
           <li>
-            <strong><%= tweet.name %></strong>
-            <p><%= tweet.body %></p>
-            <% if tweet.image.attached? %>
-              <%= image_tag tweet.image, class: "post-image" %>
-            <% end %>
-          </li>
+  <div class="post-content">
+    <!-- 左：テキスト -->
+    <div class="post-text">
+      <strong><%= tweet.name %></strong>
+      <p><%= tweet.body %></p>
+    </div>
+
+    <!-- 右：画像＋ボタン -->
+    <div class="post-image-container">
+      <% if tweet.image.attached? %>
+        <%= image_tag tweet.image, class: "post-image" %>
+      <% end %>
+      <%= link_to 'Detail', tweet_path(tweet), class: 'detail-button' %>
+    </div>
+  </div>
+</li>
         <% end %>
       </ul>
     </section>

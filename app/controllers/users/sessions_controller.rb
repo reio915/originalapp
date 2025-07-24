@@ -2,10 +2,10 @@
 
 class Users::SessionsController < Devise::SessionsController
   def after_sign_in_path_for(resource)
-  users_path(resource) 
+  user_path(resource) 
   end
   def after_sign_out_path_for(resource)
-  users_path(resource) 
+  root_path
   end 
   # before_action :configure_sign_in_params, only: [:create]
 

@@ -1,91 +1,196 @@
 body {
-  font-family: "Georgia", cursive;
+  font-family: 'Dancing Script', cursive;
   background-color: #F5F5F5;
   margin: 0;
+  position: relative;
+  min-height: 100vh;
 }
-header {
-  background-color: #DCDCDC;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-style: italic;
-}
-header h1 {
-  margin: 0;
-}
-nav a {
-  margin-left: 20px;
-  text-decoration: none;
-  color: black;
-}
+
+/* プロフィール全体を中央寄せ */
 .profile-section {
   background-color: white;
   padding: 30px;
   display: flex;
-  justify-content: flex-start;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative; /* ログアウトボタン配置のため */
 }
+
 .profile-picture {
   width: 150px;
   height: 150px;
   border-radius: 50%;
   background-color: #D3D3D3;
 }
+
 .account-name {
-  font-size: 20px;
+  font-size: 22px;
   margin-top: 10px;
 }
-.profile-info {
-  margin: 10px 0;
-}
+
+.profile-info,
 .follow-stats {
   margin: 10px 0;
 }
-.edit-button-link {
+
+/* 編集ボタン */
+.profile-edit-button {
   display: inline-block;
   margin-top: 10px;
   padding: 5px 20px;
   background-color: #DCDCDC;
   border: none;
   font-style: italic;
+  font-family: 'Dancing Script', cursive;
+  font-size: 16px;
   cursor: pointer;
   text-decoration: none;
   color: black;
   border-radius: 5px;
 }
+
 .edit-button-link:hover {
   background-color: #c0c0c0;
 }
+
+/* ログアウトボタンを右下に配置 */
+.logout-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  padding: 5px 20px;
+  background-color: #DCDCDC;
+  border: none;
+  border-radius: 5px;
+  font-style: italic;
+  font-family: 'Dancing Script', cursive;
+  font-size: 16px;
+  cursor: pointer;
+  color: black;
+}
+
+.logout-button:hover {
+  background-color: #c0c0c0;
+}
+
 hr {
   border: 1px solid #aaa;
+  margin: 20px 0;
 }
+
+/* 投稿セクション */
 .section {
-  padding: 20px;
+  padding: 30px;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center;
+  gap: 30px;
 }
+
 .section h2 {
   font-style: italic;
   font-size: 18px;
-  margin-bottom: 10px;
-}
-.posts {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-}
-.post-box {
-  width: 150px;
-  height: 150px;
-  background-color: #D3D3D3;
-}
-.section {
-  padding: 20px;
-  text-align: center;
+  margin-bottom: 20px;      
 }
 
 .posts {
   display: flex;
+  flex-direction: column; 
   gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center; /* 中央寄せ */
 }
+
+.post-box {
+  background-color: white; 
+  padding: 10px;
+  border-radius: 5px;
+  display: flex;          
+  gap: 15px;
+  align-items: flex-start;
+  position: relative;
+}
+
+.post-section-box1 {
+  background-color: #DCDCDC;
+  padding: 20px;
+  width: 90%;              
+  max-width: 500px;        
+  border-radius: 5px;
+  margin: 20px;
+}
+
+.post-section-box2 {
+  background-color: #DCDCDC;
+  padding: 20px;
+  width: 90%;              
+  max-width: 500px;        
+  border-radius: 5px;
+  margin: 20px;
+}
+
+/* 投稿内画像 */
+.post-image {
+  width: 120px;
+  height: auto;
+  border-radius: 5px;
+  flex-shrink: 0;
+}
+
+/* 本文とボタンのエリアを縦に並べる */
+.post-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* 編集・削除ボタンを縦に並べる */
+.post-actions {
+  display: flex;
+  flex-direction: column; /* ←縦並び */
+  gap: 5px;
+  margin-top: 10px;
+  align-self: flex-end;
+}
+
+/* 編集ボタン */
+.edit-button-link {
+  padding: 4px 10px;
+  background-color: #DCDCDC;
+  border: none;
+  font-style: italic;
+  font-family: 'Dancing Script', cursive;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+  border-radius: 5px;
+}
+
+.edit-button-link:hover {
+  background-color: #c0c0c0;
+}
+
+/* 削除ボタン */
+.delete-button {
+  padding: 4px 10px;
+  background-color: #DCDCDC;
+  border: none;
+  font-style: italic;
+  font-family: 'Dancing Script', cursive;
+  font-size: 14px;
+  cursor: pointer;
+  color: black;
+  border-radius: 5px;
+}
+
+.delete-button:hover {
+  background-color: #c0c0c0;
+}
+
+/* フォームをインラインに */
+.delete-form {
+  display: inline;
+}
+

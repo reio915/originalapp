@@ -10,9 +10,9 @@
       <% if t.image.attached? %>
         <%= image_tag t.image, size: '250x200' %>
       <% end %>
+      <p><%= t.name %></p>
       <p><%= t.body %></p>
       <p><%= t.created_at.strftime("%Y/%m/%d") %></p>
-      <p><%= t.name %></p>
 
       
 
@@ -21,4 +21,3 @@
     </div>
   <% end %>
 </div>
-<%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>

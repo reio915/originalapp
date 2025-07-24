@@ -1,0 +1,178 @@
+.post-detail-wrapper {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.post-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 36px;
+  margin-bottom: 30px;
+}
+
+.post-header {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.user-info {
+  width: 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-icon {
+  width: 100px;
+  height: 100px;
+  background: #ccc;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.tweet-body {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+}
+
+.tweet-image {
+  margin: 15px 0;
+  width: 50%;
+  padding-right: 50px; /* 必要に応じて右側に少しスペースを追加 */ 
+    box-sizing: border-box; /* paddingを含めて幅を計算 */ 
+}
+
+.timestamp {
+  font-family: 'Dancing Script', cursive;
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.rating-section {  
+  font-family: 'Dancing Script', cursive;
+    width: 50%; /* 評価セクションを幅の50%に設定 */ 
+    padding-right: 10px; /* 必要に応じて右側に少しスペースを追加 */ 
+    box-sizing: border-box; /* paddingを含めて幅を計算 */ 
+}
+
+.rating-section h4 {
+  margin: 10px 0 5px;
+}
+
+.star-rating {
+  display: inline-block;
+  position: relative;
+  font-size: 1.2rem;
+}
+
+.star-rating-back {
+  color: #ccc;
+}
+
+.star-rating-front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: gold;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.map-section {
+  font-family: 'Dancing Script', cursive;
+  margin-top: 25px;
+  width: 50%;
+}
+
+#map {
+  width: 100%;
+  height: 400px;
+  border-radius: 10px;
+  box-shadow: 0 2px px rgba(0,0,0,0.1);
+}
+
+.interaction-section{
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.like-button{
+  background: none;
+  border: none;
+  color: #e74c3c;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.comment-form{
+  width: 65%;
+}
+
+
+.comment-form textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: vertical;
+}
+
+.comment-form button{
+  font-family: 'Dancing Script', cursive;
+  margin-top: 8px;
+  background-color: #d3cfcf;
+  color: black;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.bottom-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin-top: 40px;
+}
+
+.comment-list, .liked-users {
+  font-family: 'Dancing Script', cursive;
+  width: 48%;
+  background: #f1f1f1;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.comment-item {
+  margin-bottom: 15px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 30px;
+  color: #007BFF;
+  text-decoration: underline;
+}
+
+.tweet-first{
+    display: flex;
+}
+
+.tweet-second{
+    display: flex;
+    width: 100%;
+}

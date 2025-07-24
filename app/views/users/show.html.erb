@@ -43,41 +43,64 @@
 <% end %>
 <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>-->
 
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cafelogue</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="profile-section">
-    <div class="profile-picture"></div>
-    <div class="account-name">Account Name</div>
-    <div class="profile-info">プロフィール</div>
-    <div class="follow-stats">フォロー　フォロワー</div>
-    <div class="button edit-button">
-   <% if current_user.id == @user.id %>
-  <%= link_to "編集する", edit_user_registration_path, class: "edit-button-link" %>
-<% end %>
-  </div>
-  <hr>
-  <div class="section">
-    <h2>My posts</h2>
+<div class="profile-section">
+  <div class="profile-picture"></div>
+  <div class="account-name">Account Name</div>
+  <div class="profile-info">プロフィール</div>
+  <div class="follow-stats">フォロー　フォロワー</div>
+
+  <% if current_user.id == @user.id %>
+    <%= link_to "Edit", edit_user_registration_path, class: "profile-edit-button" %>
+    <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "logout-button", form: { data: { turbo: false } } %>
+  <% end %>
+</div>
+
+<hr>
+
+<div class="section">
+  <!-- My posts -->
+  <div class="post-section-box1">
+    <div class="section-title">
+      <h2>My posts</h2>
+    </div>
     <div class="posts">
-      <div class="post-box"></div>
-      <div class="post-box"></div>
-      <div class="post-box"></div>
+      <% @user.tweets.each do |t| %>
+        <div class="post-box">
+          <% if t.image.attached? %>
+            <%= image_tag t.image, class: "post-image" %>
+          <% end %>
+          <div class="post-content">
+          <p><%= t.name %></p>
+          <p><%= t.body %></p>
+
+          <% if t.user == current_user %>
+            <div class="post-actions">
+              <%= link_to "Edit", edit_tweet_path(t), class: "edit-button-link" %>
+              <%= form_with model: t, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "delete-form" do |f| %>
+                <%= f.submit "Delete", class: "delete-button" %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+        </div>
+      <% end %>
+    </div>
+    </div>
+
+  <!-- Liked posts -->
+  <div class="post-section-box2">
+    <div class="section-title">
+      <h2>Liked posts</h2>
+    </div>
+    <div class="posts">
+      <% @user.liked_tweets.each do |t| %>
+        <div class="post-box">
+          <% if t.image.attached? %>
+            <%= image_tag t.image, class: "post-image" %>
+          <% end %>
+          <p><%= t.body %></p>
+        </div>
+      <% end %>
     </div>
   </div>
-  <div class="section">
-    <h2>Liked posts</h2>
-    <div class="posts">
-      <div class="post-box"></div>
-      <div class="post-box"></div>
-      <div class="post-box"></div>
-    </div>
-  </div>
-</body>
-</html>
+</div>

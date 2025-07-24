@@ -5,11 +5,11 @@
       <!-- 左カラム -->
       <div class="form-left">
         <div class="form-group">
-         <%= f.label :Name %>
-    <%= f.text_field :body, :size => 50 %>
+      <%= f.label :name, "Cafe name" %>
+    <%= f.text_field :name, :size => 50 %>
         </div>
         <div class="form-group">
-    <%= f.label :photo %>
+    <%= f.label :image %>
     <%= f.file_field :image %>
     </div>
 <h5>総合評価</h5>
@@ -78,7 +78,7 @@
     <label for="star25"><span class="text">残念</span>★</label>
  </div>
  <div class="form-group">
-          <%= f.label :comments %>
+          <%= f.label :Comment %>
     <%= f.text_area :body, :size=>"50x10" %>
         </div>
  </div>
@@ -91,7 +91,7 @@
   </div>
  <div class="form-group">
 <h2>Map</h2>
-<input id="address" type="textbox" value="GeekSalon">
+<input id="address" type="textbox" value="Cafe name">
 <input type="button" value="検索" onclick="codeAddress()">
 <p>マーカーをドラック＆ドロップで位置の調整ができます。</p>
 <div id='map'></div>
@@ -152,7 +152,7 @@ function codeAddress(){
   </div>
     </div>
 <div class="submit-wrapper">
-      <%= f.submit "Postする", class: "submit-button" %>
+      <%= f.submit "Post", class: "submit-button" %>
     </div>
   <% end %>
 </div>

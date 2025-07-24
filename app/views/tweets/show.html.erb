@@ -1,106 +1,108 @@
-<h1>GeekTwitter</h1>
-<h3>view more</h3>
-<div class="tweet">
-  <p><%= @tweet.body %></p>
-  <p><%= @tweet.created_at %></p>
-  <h3>評価</h3>
+<div class="post-detail-wrapper">
+  <h2 class="post-title">Post detail</h2>
 
-<h4>総合評価：</h4>
-<span class="star-rating">
-  <span class="star-rating-front" style="width: <%= getPercent(@tweet.overall) %>%;">★★★★★</span>
-  <span class="star-rating-back">★★★★★</span>
-</span>
-
-<h4>味：</h4>
-<span class="star-rating">
-  <span class="star-rating-front" style="width: <%= getPercent(@tweet.taste) %>%;">★★★★★</span>
-  <span class="star-rating-back">★★★★★</span>
-</span>
-
-<h4>雰囲気：</h4>
-<span class="star-rating">
-  <span class="star-rating-front" style="width: <%= getPercent(@tweet.atmosphere) %>%;">★★★★★</span>
-  <span class="star-rating-back">★★★★★</span>
-</span>
-
-<h4>接客：</h4>
-<span class="star-rating">
-  <span class="star-rating-front" style="width: <%= getPercent(@tweet.service) %>%;">★★★★★</span>
-  <span class="star-rating-back">★★★★★</span>
-</span>
-
-<h4>撮影のしやすさ：</h4>
-<span class="star-rating">
-  <span class="star-rating-front" style="width: <%= getPercent(@tweet.photo) %>%;">★★★★★</span>
-  <span class="star-rating-back">★★★★★</span>
-</span>
-  
-    <% if user_signed_in? %>
-      <% if current_user.already_liked?(@tweet) %>
-        <%= button_to tweet_like_path(@tweet), method: :delete do %>
-        <i class="fas fa-heart"></i><%= @tweet.likes.count %>  
-        <% end %>
-      <% else %>
-        <%= button_to tweet_likes_path(@tweet), method: :post do %>
-        <i class="far fa-heart"></i><%= @tweet.likes.count %>
-        <% end %>
-      <% end %>
-    <% else %>
-      <i class="far fa-heart"></i><%= @tweet.likes.count %>
-    <% end %>
-</div>
-
-<h2>いいねしたユーザー</h2>
-<% @tweet.liked_users.each do |user| %>
-  <li><%= user.email %></li>
-<% end %>
-<div class="comment-wrapper">
-  <p>コメント一覧</p>
-  <% @comments.each do |c| %>
-    <div>
-      <%= c.user.email unless c.user.blank? %>
-      <br>
-      <%= c.content %>
+  <div class="post-header">
+    <!-- 左カラム：ユーザー情報 -->
+    <div class="user-info">
+      <div class="user-icon"></div>
+      <div class="user-name"><%= @tweet.user.name %></div>
     </div>
-      <br>
-  <% end %>
+    </div>
 
-  <% if user_signed_in? %>
-    <%= form_with(model: [@tweet, @comment], local: true) do |f| %>
-      <%= f.text_area :content %>
-      <%= button_tag type: "submit" do %>
-        <i class="far fa-comments"></i> コメントする
+    <!-- 右カラム：投稿内容 -->
+    <div class="tweet-first">
+
+      <% if @tweet.image.attached? %>
+        <div class="tweet-image">
+          <%= image_tag @tweet.image, style: "max-width:100%; height:auto;" %>
+        </div>
       <% end %>
-    <% end %>
-  <% end %>
-</div>
-<div id='map'></div>
+      <p class="tweet-name"><%= @tweet.name %></p>
+      <p class="tweet-body"><%= @tweet.body %></p>
+      </div>
 
-<style>
-#map {
-  height: 600px;
-  width: 100%;
-}
-</style>
+      <p class="timestamp"><%= @tweet.created_at.strftime('%Y/%m/%d %H:%M') %></p>
 
-<!-- js部分 -->
-<script>
-//初期マップの設定
-let map
-let marker
+<div class="tweet-second">
+<div class="rating-section">
+        <h3>Star rating</h3>
+        <% { "総合評価" => @tweet.overall, "味" => @tweet.taste, "雰囲気" => @tweet.atmosphere, "接客" => @tweet.service, "撮影のしやすさ" => @tweet.photo }.each do |label, score| %>
+          <h4><%= label %>：</h4>
+          <span class="star-rating">
+            <span class="star-rating-front" style="width: <%= getPercent(score) %>%;">★★★★★</span>
+            <span class="star-rating-back">★★★★★</span>
+          </span>
+        <% end %>
+      </div>
+
+  <!-- 地図 -->
+  <script>
 function initMap(){
-  geocoder = new google.maps.Geocoder()
-
-  map = new google.maps.Map(document.getElementById('map'), {
-    center:  {lat: <%= @tweet.lat %>, lng: <%= @tweet.lng %>},
+  const map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: <%= @tweet.lat %>, lng: <%= @tweet.lng %>},
     zoom: 15,
   });
 
-   marker = new google.maps.Marker({
-    position:  {lat: <%= @tweet.lat %>, lng: <%= @tweet.lng %>},
+  new google.maps.Marker({
+    position: {lat: <%= @tweet.lat %>, lng: <%= @tweet.lng %>},
     map: map
   });
 }
 </script>
+
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATK58M2ouWL95xx_56MqkoLRF8M3tAdXk&callback=initMap" async defer></script>
-<%= link_to "投稿一覧に戻る", tweets_path %>
+
+  <div class="map-section">
+    <h3>Place</h3>
+    <div id="map"></div>
+  </div>
+  </div>
+
+  <!-- いいね＆コメントフォーム -->
+  <div class="interaction-section">
+  <% if user_signed_in? %>
+  <% if current_user.already_liked?(@tweet) %>
+    <%= button_to tweet_like_path(@tweet), method: :delete, class: "like-button" do %>
+      <i class="fas fa-heart"></i> <span>いいね</span> <%= @tweet.likes.count %>
+    <% end %>
+  <% else %>
+    <%= button_to tweet_likes_path(@tweet), method: :post, class: "like-button" do %>
+      <i class="far fa-heart"></i> <span>いいね</span> <%= @tweet.likes.count %>
+    <% end %>
+  <% end %>
+<% else %>
+  <i class="far fa-heart"></i> <span>いいね</span> <%= @tweet.likes.count %>
+<% end %>
+
+    <% if user_signed_in? %>
+      <%= form_with(model: [@tweet, @comment], local: true, class: "comment-form") do |f| %>
+        <%= f.text_area :content, placeholder: "コメントを入力...", rows: 3 %>
+        <%= button_tag type: "submit" do %>
+          <i class="far fa-comments"></i> Comment
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <!-- コメント・いいね一覧 -->
+  <div class="bottom-section">
+    <div class="comment-list">
+      <h3>Comment lists</h3>
+      <% @comments.each do |c| %>
+        <div class="comment-item">
+          <strong><%= c.user.name if c.user %></strong><br>
+          <%= c.content %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="liked-users">
+      <h3>Likers</h3>
+      <ul>
+        <% @tweet.liked_users.each do |user| %>
+          <li><%= user.name %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

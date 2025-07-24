@@ -1,24 +1,23 @@
-<h1>ユーザー検索</h1>
-
-<%= form_with url: search_users_path, method: :get, local: true do |f| %>
-  <%= f.text_field :q, placeholder: "ユーザー名で検索" %>
-  <%= f.submit "検索" %>
+<%= form_with url: request.path, method: :get, local: true, class: "search-form" do %>
+  <%= text_field_tag :search, params[:search], placeholder: "ユーザー名で検索", class: "search-input" %>
+  <%= submit_tag "検索", class: "search-button" %>
 <% end %>
-
-<% if @users.present? %>
-  <ul class="users">
+<% if @users.any? %>
+  <ul class="user-list">
     <% @users.each do |user| %>
-      <li>
+      <li class="user-item">
         <%= link_to user.name, user %>
         <% if current_user != user %>
           <% if current_user.following?(user) %>
-            <%= form_with model: current_user.active_relationships.find_by(followed_id: user.id), method: :delete, local: true do |f| %>
-              <%= f.submit "フォロー解除" %>
-            <% end %>
+            <div class="button-group">
+              <%= form_with model: current_user.active_relationships.find_by(followed_id: user.id), method: :delete, local: true do |f| %>
+                <%= f.submit "フォロー解除", class: "btn unfollow" %>
+              <% end %>
+            </div>
           <% else %>
             <%= form_with model: current_user.active_relationships.build, local: true do |f| %>
               <%= hidden_field_tag :followed_id, user.id %>
-              <%= f.submit "フォロー" %>
+              <%= f.submit "フォロー", class: "btn follow" %>
             <% end %>
           <% end %>
         <% end %>
@@ -27,5 +26,5 @@
   </ul>
   <%= will_paginate @users %>
 <% else %>
-  <p>該当するユーザーは見つかりませんでした。</p>
+  <p>ユーザーはいません。</p>
 <% end %>
